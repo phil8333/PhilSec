@@ -1,33 +1,58 @@
-// PhilSec small UI behaviours: nav toggle, theme toggle, reveal
-document.addEventListener('DOMContentLoaded', () => {
-  // mobile nav
-  const navToggle = document.getElementById('navToggle');
-  const nav = document.querySelector('.ps-nav');
-  navToggle && navToggle.addEventListener('click', () => {
-    if (!nav) return;
-    nav.style.display = (nav.style.display === 'flex') ? 'none' : 'flex';
-    nav.style.flexDirection = 'column';
-    nav.style.position = 'absolute';
-    nav.style.right = '20px';
-    nav.style.top = '70px';
-    nav.style.background = 'rgba(0,0,0,0.55)';
-    nav.style.padding = '12px';
-    nav.style.borderRadius = '10px';
-  });
+// PhilSec main.js
+// Handles nav toggle, theme switching, and reveal animations
 
-  // theme toggle (light/dark)
-  const themeBtn = document.getElementById('themeBtn');
-  const root = document.documentElement;
-  const stored = localStorage.getItem('philsec-theme');
-  if (stored === 'light') root.classList.add('light-mode');
-  themeBtn && themeBtn.addEventListener('click', () => {
-    const isLight = root.classList.toggle('light-mode');
-    localStorage.setItem('philsec-theme', isLight ? 'light' : 'dark');
-    themeBtn.setAttribute('aria-pressed', String(isLight));
-  });
+// =======================
+// NAV TOGGLE
+// =======================
+const navToggle = document.getElementById("navToggle");
+const navMenu = document.querySelector(".ps-nav");
 
-  // reveal
-  document.querySelectorAll('.reveal').forEach((el, i) => {
-    setTimeout(()=> el.classList.add('show'), 120 * i);
+if (navToggle) {
+  navToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("open");
   });
-});
+}
+
+// =======================
+// THEME TOGGLE
+// =======================
+const themeBtn = document.getElementById("themeBtn");
+
+if (themeBtn) {
+  themeBtn.addEventListener("click", () => {
+    const isDark = document.body.classList.toggle("light-mode");
+    themeBtn.setAttribute("aria-pressed", isDark);
+  });
+}
+
+// =======================
+// SCROLL REVEAL ANIMATIONS
+// =======================
+const revealItems = document.querySelectorAll(".reveal");
+
+function revealOnScroll() {
+  const triggerPoint = window.innerHeight * 0.85;
+
+  revealItems.forEach((item) => {
+    const rect = item.getBoundingClientRect();
+
+    if (rect.top < triggerPoint) {
+      item.classList.add("show");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+
+// =======================
+// DEMO SUBSCRIBE HANDLER
+// =======================
+const subscribeForm = document.getElementById("subscribeForm");
+
+if (subscribeForm) {
+  subscribeForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert("Subscribed — this is a demo!");
+  });
+}
