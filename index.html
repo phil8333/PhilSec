@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PhilSec — Cybersecurity, Tools & News</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="ps-header">
+    <div class="ps-container header-row">
+      <a class="brand" href="index.html" aria-label="PhilSec home">
+        <!-- using your uploaded image (local path) -->
+        <img class="brand-logo" src="/mnt/data/IMG_85BB5957-3101-492A-8D86-A5F614F51CB9.jpeg" alt="PhilSec logo">
+        <div class="brand-text">
+          <span class="brand-title">PhilSec</span>
+          <span class="brand-sub">Security • Tools • News</span>
+        </div>
+      </a>
+
+      <button id="navToggle" class="nav-toggle" aria-label="Open menu">☰</button>
+
+      <nav class="ps-nav" role="navigation" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="news.html">News</a>
+        <a href="tools.html">Tools</a>
+        <a href="downloads.html">Downloads</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeBtn" class="btn-ghost" aria-pressed="false">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="ps-container hero-grid">
+      <div class="hero-left">
+        <h1 class="hero-title">PhilSec — Your modern source for cybersecurity insights</h1>
+        <p class="hero-lead">In-depth tool reviews, practical tutorials, and curated open-source recommendations.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="news.html">Explore Latest</a>
+          <a class="btn btn-outline" href="tools.html">Browse Tools</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <!-- hero image (local path provided) -->
+        <img class="hero-img" src="/mnt/data/IMG_85BB5957-3101-492A-8D86-A5F614F51CB9.jpeg" alt="PhilSec hero illustration">
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main class="ps-container site-grid">
+    <section class="panel posts-panel reveal">
+      <h2>Latest Posts</h2>
+      <div id="postsGrid" class="posts-grid">
+        <!-- placeholder cards (replace with actual content later) -->
+        <article class="card">
+          <div class="card-media" style="background-image: linear-gradient(135deg,#0ea5ff33,#6ee7b733)"></div>
+          <h3 class="title">Intro to Secure Tooling</h3>
+          <p class="excerpt">Short summary: how to pick safe open-source tools and build a minimal secure workflow.</p>
+          <div class="meta small">Sep 2025 • Tools</div>
+        </article>
+        <article class="card">
+          <div class="card-media" style="background-image: linear-gradient(135deg,#7c4dff33,#2ea3ff33)"></div>
+          <h3 class="title">Locking Down Windows: Step-by-step</h3>
+          <p class="excerpt">Practical hardening steps and recommended utilities to tighten a Windows install.</p>
+          <div class="meta small">Sep 2025 • Guides</div>
+        </article>
+      </div>
+    </section>
+
+    <aside class="panel sidebar reveal">
+      <div class="panel-block">
+        <h3>Subscribe</h3>
+        <form id="subscribeForm" onsubmit="event.preventDefault(); alert('Subscribed — demo');">
+          <input class="input" type="email" placeholder="you@example.com" required>
+          <button class="btn" type="submit">Subscribe</button>
+        </form>
+      </div>
+
+      <div class="panel-block">
+        <h3>Tags</h3>
+        <div class="tag-cloud">
+          <a class="tag">Open Source</a>
+          <a class="tag">Tools</a>
+          <a class="tag">Tutorials</a>
+        </div>
+      </div>
+
+      <div class="panel-block">
+        <h3>Contact</h3>
+        <p class="small">Email: bernardeshun833@gmail.com</p>
+      </div>
+    </aside>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="ps-footer">
+    <div class="ps-container">
+      <div class="footer-inner">
+        <div>© 2025 PhilSec</div>
+        <nav class="footer-links">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
