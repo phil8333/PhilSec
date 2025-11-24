@@ -1,58 +1,66 @@
-// PhilSec main.js
-// Handles nav toggle, theme switching, and reveal animations
-
-// =======================
-// NAV TOGGLE
-// =======================
-const navToggle = document.getElementById("navToggle");
-const navMenu = document.querySelector(".ps-nav");
-
-if (navToggle) {
-  navToggle.addEventListener("click", () => {
-    navMenu.classList.toggle("open");
-  });
+/* ================================
+   PAGE FADE TRANSITIONS
+================================= */
+body.page-enter {
+  opacity: 0;
+  transition: opacity .6s ease;
+}
+body.page-exit {
+  opacity: 0;
+}
+body.page-enter.page-exit {
+  opacity: 0;
+}
+body.page-enter {
+  opacity: 1;
 }
 
-// =======================
-// THEME TOGGLE
-// =======================
-const themeBtn = document.getElementById("themeBtn");
-
-if (themeBtn) {
-  themeBtn.addEventListener("click", () => {
-    const isDark = document.body.classList.toggle("light-mode");
-    themeBtn.setAttribute("aria-pressed", isDark);
-  });
+/* ================================
+   MOBILE NAV
+================================= */
+.ps-nav.nav-open {
+  display: flex !important;
+  flex-direction: column;
+  background: rgba(255,255,255,0.04);
+  padding: 14px;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  margin-top: 12px;
 }
 
-// =======================
-// SCROLL REVEAL ANIMATIONS
-// =======================
-const revealItems = document.querySelectorAll(".reveal");
-
-function revealOnScroll() {
-  const triggerPoint = window.innerHeight * 0.85;
-
-  revealItems.forEach((item) => {
-    const rect = item.getBoundingClientRect();
-
-    if (rect.top < triggerPoint) {
-      item.classList.add("show");
-    }
-  });
+/* toggle animation */
+.nav-toggle.open {
+  transform: rotate(90deg);
+  transition: .3s;
 }
 
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
+/* ================================
+   AUTO-HIDE HEADER
+================================= */
+.hide-header {
+  transform: translateY(-120%);
+  transition: transform .4s ease;
+}
 
-// =======================
-// DEMO SUBSCRIBE HANDLER
-// =======================
-const subscribeForm = document.getElementById("subscribeForm");
-
-if (subscribeForm) {
-  subscribeForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    alert("Subscribed — this is a demo!");
-  });
+/* ================================
+   SCROLL TOP BUTTON
+================================= */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  color: #02111a;
+  font-weight: 800;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+.scroll-top-btn.show {
+  opacity: 1;
+  pointer-events: auto;
 }
