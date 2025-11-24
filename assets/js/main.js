@@ -1,66 +1,62 @@
-/* ================================
-   PAGE FADE TRANSITIONS
-================================= */
-body.page-enter {
-  opacity: 0;
-  transition: opacity .6s ease;
-}
-body.page-exit {
-  opacity: 0;
-}
-body.page-enter.page-exit {
-  opacity: 0;
-}
-body.page-enter {
-  opacity: 1;
+// =========================================================
+// MOBILE NAV
+// =========================================================
+const navToggle = document.getElementById("navToggle");
+const nav = document.querySelector(".ps-nav");
+
+if (navToggle) {
+  navToggle.addEventListener("click", () => {
+    nav.classList.toggle("open");
+  });
 }
 
-/* ================================
-   MOBILE NAV
-================================= */
-.ps-nav.nav-open {
-  display: flex !important;
-  flex-direction: column;
-  background: rgba(255,255,255,0.04);
-  padding: 14px;
-  border-radius: 12px;
-  backdrop-filter: blur(8px);
-  margin-top: 12px;
+// =========================================================
+// THEME TOGGLE
+// =========================================================
+const themeBtn = document.getElementById("themeBtn");
+const html = document.documentElement;
+
+// Load theme from saved preference
+let savedTheme = localStorage.getItem("theme");
+if (!savedTheme) {
+  savedTheme = "dark";
+  localStorage.setItem("theme", "dark");
+}
+html.setAttribute("data-theme", savedTheme);
+
+// Update button label
+updateThemeIcon(savedTheme);
+
+// Toggle theme on click
+themeBtn.addEventListener("click", () => {
+  let current = html.getAttribute("data-theme");
+  let next = current === "dark" ? "light" : "dark";
+
+  html.setAttribute("data-theme", next);
+  localStorage.setItem("theme", next);
+
+  updateThemeIcon(next);
+});
+
+// Icon update function
+function updateThemeIcon(theme) {
+  if (theme === "light") {
+    themeBtn.textContent = "🌙"; // moon for dark mode switch
+  } else {
+    themeBtn.textContent = "☀️"; // sun for light mode switch
+  }
 }
 
-/* toggle animation */
-.nav-toggle.open {
-  transform: rotate(90deg);
-  transition: .3s;
+// =========================================================
+// SCROLL REVEAL
+// =========================================================
+const reveals = document.querySelectorAll(".reveal");
+function checkReveal() {
+  const windowHeight = window.innerHeight;
+  reveals.forEach((el) => {
+    const top = el.getBoundingClientRect().top;
+    if (top < windowHeight - 90) el.classList.add("visible");
+  });
 }
-
-/* ================================
-   AUTO-HIDE HEADER
-================================= */
-.hide-header {
-  transform: translateY(-120%);
-  transition: transform .4s ease;
-}
-
-/* ================================
-   SCROLL TOP BUTTON
-================================= */
-.scroll-top-btn {
-  position: fixed;
-  bottom: 22px;
-  right: 22px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: none;
-  background: linear-gradient(90deg,var(--accent),var(--accent-2));
-  color: #02111a;
-  font-weight: 800;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .3s ease;
-}
-.scroll-top-btn.show {
-  opacity: 1;
-  pointer-events: auto;
-}
+window.addEventListener("scroll", checkReveal);
+window.addEventListener("load", checkReveal);
