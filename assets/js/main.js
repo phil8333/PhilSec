@@ -1,62 +1,58 @@
-// =========================================================
-// MOBILE NAV
-// =========================================================
+// PhilSec main.js
+// Handles nav toggle, theme switching, and reveal animations
+
+// =======================
+// NAV TOGGLE
+// =======================
 const navToggle = document.getElementById("navToggle");
-const nav = document.querySelector(".ps-nav");
+const navMenu = document.querySelector(".ps-nav");
 
 if (navToggle) {
   navToggle.addEventListener("click", () => {
-    nav.classList.toggle("open");
+    navMenu.classList.toggle("open");
   });
 }
 
-// =========================================================
+// =======================
 // THEME TOGGLE
-// =========================================================
+// =======================
 const themeBtn = document.getElementById("themeBtn");
-const html = document.documentElement;
 
-// Load theme from saved preference
-let savedTheme = localStorage.getItem("theme");
-if (!savedTheme) {
-  savedTheme = "dark";
-  localStorage.setItem("theme", "dark");
-}
-html.setAttribute("data-theme", savedTheme);
-
-// Update button label
-updateThemeIcon(savedTheme);
-
-// Toggle theme on click
-themeBtn.addEventListener("click", () => {
-  let current = html.getAttribute("data-theme");
-  let next = current === "dark" ? "light" : "dark";
-
-  html.setAttribute("data-theme", next);
-  localStorage.setItem("theme", next);
-
-  updateThemeIcon(next);
-});
-
-// Icon update function
-function updateThemeIcon(theme) {
-  if (theme === "light") {
-    themeBtn.textContent = "🌙"; // moon for dark mode switch
-  } else {
-    themeBtn.textContent = "☀️"; // sun for light mode switch
-  }
-}
-
-// =========================================================
-// SCROLL REVEAL
-// =========================================================
-const reveals = document.querySelectorAll(".reveal");
-function checkReveal() {
-  const windowHeight = window.innerHeight;
-  reveals.forEach((el) => {
-    const top = el.getBoundingClientRect().top;
-    if (top < windowHeight - 90) el.classList.add("visible");
+if (themeBtn) {
+  themeBtn.addEventListener("click", () => {
+    const isDark = document.body.classList.toggle("light-mode");
+    themeBtn.setAttribute("aria-pressed", isDark);
   });
 }
-window.addEventListener("scroll", checkReveal);
-window.addEventListener("load", checkReveal);
+
+// =======================
+// SCROLL REVEAL ANIMATIONS
+// =======================
+const revealItems = document.querySelectorAll(".reveal");
+
+function revealOnScroll() {
+  const triggerPoint = window.innerHeight * 0.85;
+
+  revealItems.forEach((item) => {
+    const rect = item.getBoundingClientRect();
+
+    if (rect.top < triggerPoint) {
+      item.classList.add("show");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+
+// =======================
+// DEMO SUBSCRIBE HANDLER
+// =======================
+const subscribeForm = document.getElementById("subscribeForm");
+
+if (subscribeForm) {
+  subscribeForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert("Subscribed — this is a demo!");
+  });
+}
